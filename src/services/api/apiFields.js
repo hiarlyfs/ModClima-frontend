@@ -14,7 +14,6 @@ export async function saveField(data) {
 export async function searchFieldByCode(code) {
   try {
     const response = await api.get(`/fields?code=${code}`);
-    console.log(response.data);
     return response.data.field;
   } catch (err) {
     throw new Error(

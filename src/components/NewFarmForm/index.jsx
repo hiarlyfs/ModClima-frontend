@@ -8,19 +8,38 @@ import WithSaveEntity from '../WithSaveEntity';
 import ButtonSubmit from '../ButtonSubmit';
 import AddEntity from '../AddEntity';
 import Input from '../Input';
+import FeedbackApi from '../FeedbackApi';
 
 import { searchFieldByCode } from '../../services/api/apiFields';
+import { createFarm } from '../../services/api/apiFarms';
+import { ActionTypes } from '../../reducers/saveEntity.reducer';
 
 import useStyles from './styles';
 
-// TODO: Implement the code to save a farm
-const NewFarmForm = () => {
+const NewFarmForm = ({ saving, error, entity, dispatch, actionTypes }) => {
   const [fieldCode, setFieldCode] = useState('');
   const [fields, setFields] = useState([]);
+  const [name, setName] = useState('');
+  const [code, setCode] = useState('');
 
   const onChangeFieldCode = useCallback((event) => {
     setFieldCode(event.target.value);
   }, []);
+
+  const onChangeName = useCallback((event) => {
+    setName(event.target.value);
+  }, []);
+
+  const onChangeCode = useCallback((event) => {
+    setCode(event.target.value);
+  }, []);
+
+  const clearAllInputs = () => {
+    setName('');
+    setCode('');
+    setFieldCode('');
+    setFields([]);
+  };
 
   const addNewField = async () => {
     try {
@@ -36,16 +55,32 @@ const NewFarmForm = () => {
     setFields(fields.filter((field) => field.id !== fieldId));
   };
 
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    dispatch({ type: ActionTypes.START_SAVE_ENTITY });
+    try {
+      const fieldIds = fields.map((field) => field.id);
+      console.log(fieldIds);
+      const farm = await createFarm({ fieldIds, name, code });
+      dispatch({ type: ActionTypes.SAVE_ENTITY_SUCCESS, payload: farm });
+      clearAllInputs();
+    } catch (err) {
+      dispatch({ type: ActionTypes.SAVE_ENTITY_FAILURE, payload: err });
+    }
+  };
+
   const styles = useStyles();
   return (
-    <form className={styles.container}>
-      <Input title='Name' />
-      <Input title='Code' />
+    <form onSubmit={onSubmit} className={styles.container}>
+      <Input value={name} onChange={onChangeName} title='Name' />
+      <Box marginTop='15px'>
+        <Input value={code} onChange={onChangeCode} title='Code' />
+      </Box>
       <Typography className={styles.fieldsTitle}>Fields</Typography>
       {fields.map(
         ({
           id,
-          code,
+          code: codeField,
           coordinates: {
             coordinates: [latitude, longitude],
           },
@@ -62,7 +97,7 @@ const NewFarmForm = () => {
             />
             <Box alignItems='center' display='flex' flexDirection='row'>
               <Typography className={styles.fieldTitle}>Code: </Typography>
-              <Typography className={styles.fieldValue}>{code}</Typography>
+              <Typography className={styles.fieldValue}>{codeField}</Typography>
             </Box>
             <Box alignItems='center' display='flex' flexDirection='row'>
               <Typography className={styles.fieldTitle}>Latitude: </Typography>
@@ -83,6 +118,7 @@ const NewFarmForm = () => {
         onAdd={addNewField}
       />
       <ButtonSubmit btTitle='Create Farm' />
+      <FeedbackApi loading={saving} error={error} />
     </form>
   );
 };

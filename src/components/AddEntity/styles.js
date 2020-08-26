@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,
+    width: '100%',
   },
 
   textFieldInput: {

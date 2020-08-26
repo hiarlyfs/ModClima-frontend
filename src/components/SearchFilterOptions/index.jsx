@@ -12,15 +12,15 @@ const SearchFilterOptions = ({ filterOptions, value, onChange }) => {
   return (
     <Box className={styles.container}>
       <Typography className={styles.title}>Filter by:</Typography>
-      {filterOptions.map((filterOption) => (
-        <Select
-          value={value}
-          onChange={onChange}
-          className={styles.selectComponent}
-        >
+      <Select
+        value={value}
+        onChange={onChange}
+        className={styles.selectComponent}
+      >
+        {filterOptions.map((filterOption) => (
           <option value={filterOption}>{filterOption}</option>
-        </Select>
-      ))}
+        ))}
+      </Select>
     </Box>
   );
 };

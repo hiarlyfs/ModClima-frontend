@@ -12,6 +12,7 @@ const AddEntity = ({ value, onChange, placeHolder, label, onAdd }) => {
   return (
     <Box className={styles.container}>
       <TextField
+        fullWidth
         className={styles.textFieldInput}
         variant='outlined'
         placeholder={placeHolder}
@@ -24,4 +25,4 @@ const AddEntity = ({ value, onChange, placeHolder, label, onAdd }) => {
   );
 };
 
-export default AddEntity;
+export default React.memo(AddEntity);
