@@ -77,6 +77,13 @@ const NewFarmForm = ({ saving, error, entity, dispatch, actionTypes }) => {
         <Input value={code} onChange={onChangeCode} title='Code' />
       </Box>
       <Typography className={styles.fieldsTitle}>Fields</Typography>
+      <AddEntity
+        value={fieldCode}
+        onChange={onChangeFieldCode}
+        placeHolder='Type the field code'
+        label='Add Field'
+        onAdd={addNewField}
+      />
       {fields.map(
         ({
           id,
@@ -87,7 +94,7 @@ const NewFarmForm = ({ saving, error, entity, dispatch, actionTypes }) => {
         }) => (
           <Box
             position='relative'
-            marginBottom='10px'
+            marginTop='10px'
             className={styles.fieldContainer}
             key={id}
           >
@@ -110,13 +117,6 @@ const NewFarmForm = ({ saving, error, entity, dispatch, actionTypes }) => {
           </Box>
         )
       )}
-      <AddEntity
-        value={fieldCode}
-        onChange={onChangeFieldCode}
-        placeHolder='Type the field code'
-        label='Add Field'
-        onAdd={addNewField}
-      />
       <ButtonSubmit btTitle='Create Farm' />
       <FeedbackApi loading={saving} error={error} />
     </form>

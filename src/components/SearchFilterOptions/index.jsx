@@ -25,4 +25,4 @@ const SearchFilterOptions = ({ filterOptions, value, onChange }) => {
   );
 };
 
-export default SearchFilterOptions;
+export default React.memo(SearchFilterOptions);
