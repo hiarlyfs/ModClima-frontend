@@ -6,6 +6,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Fields = lazy(() => import('./pages/Fields'));
 const Farms = lazy(() => import('./pages/Farms'));
 const Harvests = lazy(() => import('./pages/Harvests'));
+const Mills = lazy(() => import('./pages/Mills'));
 
 const Routes = () => {
   return (
@@ -16,6 +17,7 @@ const Routes = () => {
         <Route path='/fields' component={Fields} exact />
         <Route path='/farms' component={Farms} exact />
         <Route path='/harvests' component={Harvests} exact />
+        <Route path='/mills' component={Mills} exact />
       </BrowserRouter>
     </Suspense>
   );

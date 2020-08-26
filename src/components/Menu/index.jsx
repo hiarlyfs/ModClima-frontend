@@ -22,7 +22,7 @@ const Menu = () => {
       <Link className={styles.link} to='/harvests'>
         Harvests
       </Link>
-      <Link className={styles.link} to='/mill'>
+      <Link className={styles.link} to='/mills'>
         Mills
       </Link>
     </Box>
