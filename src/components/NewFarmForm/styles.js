@@ -1,0 +1,36 @@
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  fieldsTitle: {
+    marginTop: 18,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  fieldContainer: {
+    padding: 5,
+    boxShadow:
+      '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
+  },
+
+  fieldTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+
+  fieldValue: {
+    fontSize: 12,
+  },
+
+  deleteIcon: {
+    position: 'absolute',
+    right: 5,
+  },
+});
+
+export default useStyles;
