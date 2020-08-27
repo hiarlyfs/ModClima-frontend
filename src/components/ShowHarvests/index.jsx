@@ -36,7 +36,7 @@ const ShowHarvests = ({ harvests, removeHarvest }) => {
             </Typography>
             <Typography className={styles.farmLineValue}>{end}</Typography>
           </Box>
-          {farms.length > 0 && (
+          {farms && farms.length > 0 && (
             <Box marginTop='20px' display='flex' flexDirection='column'>
               <Typography className={styles.farmLineTitle}>Farms</Typography>
               <ShowFarms farms={farms} />
