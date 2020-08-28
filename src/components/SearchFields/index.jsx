@@ -39,11 +39,8 @@ const SearchFields = ({ searching, error, data, dispatch }) => {
       <SearchFilterOptions value='code' filterOptions={['code']} />
       <Input value={codeFilter} onChange={onChangeCode} title='Code' />
       <ButtonSubmit btTitle='Search Field' />
-      {searching || error ? (
-        <FeedbackApi />
-      ) : (
-        <Box>{data.length > 0 && <ShowFields fields={data} />}</Box>
-      )}
+      <FeedbackApi loading={searching} error={error} />
+      <Box>{data.length > 0 && <ShowFields fields={data} />}</Box>
     </form>
   );
 };

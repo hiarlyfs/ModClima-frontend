@@ -6,13 +6,13 @@ import MuiAlert from '@material-ui/lab/Alert';
 import NewEntity from './components/NewEntity';
 import Routes from './Routes';
 
+import ws from './websockets/wsClient';
+
 function App() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [newEntity, setNewEntity] = useState({});
 
   const closeSnackback = useCallback(() => setShowSnackbar(false), []);
-
-  const ws = new WebSocket('ws://localhost:3030');
   ws.onmessage = (event) => {
     setShowSnackbar(true);
     setNewEntity(JSON.parse(event.data));

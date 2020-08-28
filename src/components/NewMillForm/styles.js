@@ -4,6 +4,7 @@ const useStyles = makeStyles({
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
   },
 
   harvestsTitle: {
